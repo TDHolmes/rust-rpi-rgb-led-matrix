@@ -1,4 +1,4 @@
-use libc::{c_char, c_int, c_uint, uint8_t}; //FILE};
+use libc::{c_char, c_int, c_uint};
 use std::ffi::CString;
 
 pub enum LedMatrix {}
@@ -196,9 +196,9 @@ impl LedCanvas {
         unsafe {
             led_canvas_fill(
                 self,
-                color.red as uint8_t,
-                color.green as uint8_t,
-                color.blue as uint8_t,
+                color.red as u8,
+                color.green as u8,
+                color.blue as u8,
             );
         }
     }
@@ -211,9 +211,9 @@ impl LedCanvas {
                 y0 as c_int,
                 x1 as c_int,
                 y1 as c_int,
-                color.red as uint8_t,
-                color.green as uint8_t,
-                color.blue as uint8_t,
+                color.red as u8,
+                color.green as u8,
+                color.blue as u8,
             );
         }
     }
@@ -290,12 +290,12 @@ extern "C" {
         canvas: *mut LedCanvas,
         x: c_int,
         y: c_int,
-        r: uint8_t,
-        g: uint8_t,
-        b: uint8_t,
+        r: u8,
+        g: u8,
+        b: u8,
     );
     pub fn led_canvas_clear(canvas: *mut LedCanvas);
-    pub fn led_canvas_fill(canvas: *mut LedCanvas, r: uint8_t, g: uint8_t, b: uint8_t);
+    pub fn led_canvas_fill(canvas: *mut LedCanvas, r: u8, g: u8, b: u8);
     pub fn led_matrix_create_offscreen_canvas(matrix: *mut LedMatrix) -> *mut LedCanvas;
     pub fn led_matrix_swap_on_vsync(
         matrix: *mut LedMatrix,
@@ -308,9 +308,9 @@ extern "C" {
         font: *const LedFont,
         x: c_int,
         y: c_int,
-        r: uint8_t,
-        g: uint8_t,
-        b: uint8_t,
+        r: u8,
+        g: u8,
+        b: u8,
         utf8_text: *const c_char,
         kerning_offset: c_int,
     ) -> c_int;
@@ -319,9 +319,9 @@ extern "C" {
         font: *const LedFont,
         x: c_int,
         y: c_int,
-        r: uint8_t,
-        g: uint8_t,
-        b: uint8_t,
+        r: u8,
+        g: u8,
+        b: u8,
         utf8_text: *const c_char,
         kerning_offset: c_int,
     ) -> c_int;
@@ -330,9 +330,9 @@ extern "C" {
         x: c_int,
         y: c_int,
         radius: c_int,
-        r: uint8_t,
-        g: uint8_t,
-        b: uint8_t,
+        r: u8,
+        g: u8,
+        b: u8,
     );
     pub fn draw_line(
         canvas: *mut LedCanvas,
@@ -340,8 +340,8 @@ extern "C" {
         y0: c_int,
         x1: c_int,
         y1: c_int,
-        r: uint8_t,
-        g: uint8_t,
-        b: uint8_t,
+        r: u8,
+        g: u8,
+        b: u8,
     );
 }
